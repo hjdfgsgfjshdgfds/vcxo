@@ -1,0 +1,392 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: #f8fafc;
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 370px;
+    max-width: 95vw;
+    height: 100vh;
+    background: #fff;
+    z-index: 2;
+    padding: 32px 24px 24px 24px;
+    box-shadow: 4px 0 24px rgba(68, 138, 255, 0.10), 1.5px 0 8px rgba(0,0,0,0.07);
+    border-radius: 0 18px 18px 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: width 0.2s, left 0.2s, top 0.2s;
+}
+
+@media (max-width: 900px) {
+    #sidebar {
+        position: static;
+        width: 100vw;
+        max-width: 100vw;
+        height: auto;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        box-shadow: none;
+        margin: 0;
+    }
+}
+
+#map {
+    position: fixed;
+    top: 0;
+    left: 370px;
+    width: calc(100vw - 370px);
+    height: 100vh;
+    z-index: 1;
+    filter: saturate(1.08) brightness(1.03);
+    transition: left 0.2s, width 0.2s;
+}
+@media (max-width: 900px) {
+    #map {
+        left: 0;
+        width: 100vw;
+    }
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 2.1em;
+    font-weight: 900;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    position: relative;
+}
+.logo {
+    font-size: 1.2em;
+    margin-right: 2px;
+}
+.brand {
+    color: #ff4444;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.project-desc {
+    margin-bottom: 8px;
+}
+.main-copy {
+    font-size: 1.18em;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 4px;
+}
+.sub-copy {
+    font-size: 0.98em;
+    color: #555;
+    margin-bottom: 0;
+}
+
+.legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1em;
+    margin-bottom: 8px;
+    color: #444;
+    font-weight: 600;
+}
+.legend-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+}
+
+#stats {
+    margin-bottom: 0;
+    padding: 10px 0 0 0;
+    background: none;
+    border-radius: 0;
+    font-size: 1.08em;
+    display: flex;
+    gap: 18px;
+    color: #555;
+    font-weight: 500;
+}
+#stats p {
+    margin: 0;
+    font-size: 1em;
+}
+
+#search-bar {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 0;
+    border: 1.5px solid #e3eafc;
+    border-radius: 12px;
+    font-size: 1.08em;
+    outline: none;
+    background: #f8fafc;
+    box-shadow: 0 1px 4px rgba(68,138,255,0.04);
+    transition: border 0.2s, box-shadow 0.2s;
+}
+#search-bar:focus {
+    border: 1.5px solid #448aff;
+    box-shadow: 0 2px 8px rgba(68,138,255,0.10);
+}
+
+#top-list {
+    margin: 10px 0 10px 0;
+}
+.top-title {
+    font-size: 1.08em;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 4px;
+}
+#top-5 {
+    margin: 0 0 0 18px;
+    padding: 0;
+    font-size: 1em;
+    color: #444;
+}
+#top-5 li {
+    margin-bottom: 2px;
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 1.3;
+}
+#top-5 a {
+    color: #ff4444;
+    text-decoration: none;
+    font-weight: 700;
+}
+#top-5 a:hover {
+    text-decoration: underline;
+}
+
+#image-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.image-item {
+    padding: 12px 10px 12px 10px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(68,138,255,0.07), 0 1px 4px rgba(0,0,0,0.04);
+    cursor: pointer;
+    transition: transform 0.18s, box-shadow 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1.5px solid #f0f4fa;
+}
+
+.image-item:hover {
+    transform: translateY(-2px) scale(1.025);
+    box-shadow: 0 4px 18px rgba(68, 138, 255, 0.13);
+    border: 1.5px solid #448aff33;
+}
+
+.image-item img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+    border: 1.5px solid #e3eafc;
+}
+
+.image-item .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.image-item .location {
+    font-size: 1em;
+    color: #666;
+    font-weight: 500;
+}
+
+.image-item .vsco-link {
+    color: #448aff;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1em;
+    margin-top: 2px;
+    transition: color 0.18s;
+}
+.image-item .vsco-link:hover {
+    color: #005ecb;
+    text-decoration: underline;
+}
+
+.image-item .fly-btn {
+    background: #448aff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background 0.18s, box-shadow 0.18s;
+    box-shadow: 0 1px 3px rgba(68,138,255,0.07);
+}
+.image-item .fly-btn:hover {
+    background: #005ecb;
+    box-shadow: 0 2px 8px rgba(68,138,255,0.13);
+}
+
+.leaflet-popup-content img {
+    max-width: 240px;
+    max-height: 240px;
+    display: block;
+    margin: 0 auto 8px auto;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.13);
+    border: 1.5px solid #e3eafc;
+}
+
+.leaflet-popup-content .location {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 1.08em;
+    color: #666;
+    font-weight: 500;
+}
+
+.leaflet-popup-content .vsco-link {
+    display: block;
+    margin: 10px auto 0 auto;
+    text-align: center;
+    color: #448aff;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.08em;
+    border-radius: 6px;
+    padding: 4px 0;
+    transition: background 0.18s, color 0.18s;
+}
+.leaflet-popup-content .vsco-link:hover {
+    background: #f0f4fa;
+    color: #005ecb;
+}
+
+/* Marker cluster styles (from plugin) */
+.marker-cluster-small {
+    background-color: rgba(68,138,255,0.6) !important;
+}
+.marker-cluster-medium {
+    background-color: rgba(255,193,7,0.7) !important;
+}
+.marker-cluster-large {
+    background-color: rgba(244,67,54,0.7) !important;
+}
+
+button {
+    font-family: inherit;
+}
+
+.bier {
+    color: #ff4444;
+    font-weight: 900;
+    font-size: 1.08em;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-top: 2px;
+}
+
+.scammy-sidebar {
+    background: linear-gradient(120deg, #fff0f6 0%, #ffe3e3 100%);
+    border: 3px solid #ff4444;
+    box-shadow: 0 0 32px #ff444455, 0 1.5px 8px #ff444422;
+    border-radius: 0 24px 24px 0;
+    padding-top: 24px;
+}
+.online-badge {
+    background: #ff4444;
+    color: #fff;
+    font-size: 0.7em;
+    font-weight: 900;
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin-left: auto;
+    margin-right: 0;
+    box-shadow: 0 0 8px #ff4444aa;
+    animation: pulse 1.2s infinite alternate;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 8px #ff4444aa; }
+    100% { box-shadow: 0 0 24px #ff4444cc; }
+}
+.scammy-desc {
+    background: #fff6f6;
+    border: 2px solid #ffb3b3;
+    border-radius: 12px;
+    padding: 16px 14px 10px 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 12px #ffb3b355;
+}
+.scammy-headline {
+    font-size: 1.35em;
+    font-weight: 900;
+    color: #ff4444;
+    text-shadow: 0 2px 8px #ffb3b3;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+.scammy-sub {
+    font-size: 1.08em;
+    color: #c2185b;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+.scammy-alert {
+    display: block;
+    color: #fff;
+    background: #ff4444;
+    border-radius: 8px;
+    padding: 4px 10px;
+    margin-top: 8px;
+    font-size: 1.08em;
+    font-weight: 900;
+    text-align: center;
+    box-shadow: 0 1px 8px #ff4444aa;
+}
+
+.stalk-btn {
+    background: #ff4444;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 1em;
+    font-weight: 900;
+    cursor: pointer;
+    margin-left: 8px;
+    margin-top: 6px;
+    transition: background 0.18s, box-shadow 0.18s;
+    box-shadow: 0 1px 3px #ff444477;
+    text-shadow: 0 1px 2px #c2185b44;
+    letter-spacing: 0.5px;
+}
+.stalk-btn:hover {
+    background: #c2185b;
+    box-shadow: 0 2px 8px #ff4444aa;
+} 

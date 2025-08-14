@@ -1,0 +1,68 @@
+/* styles.css (v1.28 - Visual Overlay) */
+
+.vsco-gps-overlay {
+  position: absolute; /* Position relative to the parent container */
+  bottom: 5px;       /* Position at bottom-right */
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.7); /* Default Semi-transparent black */
+  color: white;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 10px;   /* Small font size */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* System font stack */
+  z-index: 999;      /* Ensure it's on top of most things */
+  line-height: 1.2;
+  pointer-events: none; /* Allow clicks to pass through the background */
+  max-width: 90%;     /* Prevent overlay from becoming too wide */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  text-align: right;
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden;    /* Hide overflow */
+  text-overflow: ellipsis; /* Add ... if text too long (though should be rare) */
+}
+
+/* Specific styling for the map link inside the overlay */
+.vsco-gps-overlay .vsco-gps-map-link {
+  color: #64b5f6; /* Light blue link color */
+  text-decoration: underline;
+  font-weight: bold;
+  margin-left: 4px; /* Space between icon/text and link */
+  /* Allow clicks ONLY on the link itself */
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.vsco-gps-overlay .vsco-gps-map-link:hover {
+  color: #bbdefb; /* Lighter blue on hover */
+}
+
+/* Specific background colors for different statuses */
+.vsco-gps-overlay.vsco-gps-has-gps {
+  /* Red for GPS Found */
+  background-color: rgba(211, 47, 47, 0.85); /* Slightly less transparent Red */
+  color: white;
+}
+.vsco-gps-overlay.vsco-gps-has-exif {
+   /* Yellow for EXIF only */
+  background-color: rgba(251, 192, 45, 0.85); /* Slightly less transparent Yellow */
+  color: black;
+}
+.vsco-gps-overlay.vsco-gps-no-exif {
+   /* Gray for No EXIF */
+  background-color: rgba(158, 158, 158, 0.75); /* Slightly less transparent Gray */
+  color: black;
+}
+.vsco-gps-overlay.vsco-gps-error {
+  /* Orange for Error (including GPS link error) */
+  background-color: rgba(255, 112, 67, 0.85); /* Slightly less transparent Orange */
+  color: black;
+}
+
+/* If an image is inside a link, make sure overlay doesn't prevent link click */
+/* This might not be necessary depending on VSCO's structure and how overlay is appended */
+/* a > img + .vsco-gps-overlay {
+  pointer-events: none;
+}
+a > img + .vsco-gps-overlay .vsco-gps-map-link {
+  pointer-events: auto;
+} */

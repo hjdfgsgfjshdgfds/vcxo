@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotspotting</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="sidebar" class="scammy-sidebar">
+        <div class="logo-title">
+            <span class="logo">🔥</span>
+            <span class="brand">Hotspotting</span>
+            <span class="online-badge">Online Now</span>
+        </div>
+        <div class="project-desc scammy-desc">
+            <div class="main-copy scammy-headline">Hot VSCO Girls Are Near You And Want To Be Found! 🔥</div>
+            <div class="sub-copy scammy-sub">Click a red dot to see her exact location. <b>This is not a joke.</b> <br><span class="scammy-alert">100+ girls are online in your area right now.</span></div>
+        </div>
+        <div class="legend">
+            <span class="legend-dot" style="background:#ff4444;"></span> GPS Hotspot
+        </div>
+        <div id="stats">
+            <p>Total Images: <span id="total-images">0</span></p>
+            <p>Images with GPS: <span id="gps-images">0</span></p>
+        </div>
+        <input id="search-bar" type="text" placeholder="Search by URL or coordinates..." />
+        <div id="top-list">
+            <div class="top-title">Top 5 Recent Hotspots</div>
+            <ol id="top-5"></ol>
+        </div>
+        <div id="image-list"></div>
+    </div>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 

@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "VSCO EXIF GPS Checker",
+  "version": "1.30",
+  "description": "Logs EXIF data to console, notifies via badge if GPS found.",
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "action",
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://vsco.co/*",
+    "*://*.vsco.co/*",
+    "*://localhost/*",
+    "*://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://vsco.co/*"],
+      "js": ["exif.js", "content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://localhost/*", "*://127.0.0.1/*"],
+      "js": ["website_bridge.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
