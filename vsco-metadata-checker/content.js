@@ -186,6 +186,24 @@ function processParseResult(result, originalSrcUrl, mediaId) { // Added mediaId 
               }
         }
 
+        // --- Fallback: direct match on image src for standalone media pages ---
+        if (!targetContainer && originalSrcUrl) {
+            try {
+                const escapedUrl = originalSrcUrl.replace(/"/g, '\\"');
+                const imgEl = document.querySelector(`img[src="${escapedUrl}"],img[currentSrc="${escapedUrl}"]`);
+                if (imgEl) {
+                    targetContainer = imgEl.closest('figure') || imgEl.parentElement;
+                    foundBy = 'src match';
+                    const containerPosition = window.getComputedStyle(targetContainer).position;
+                    if (!['relative', 'absolute', 'fixed', 'sticky'].includes(containerPosition)) {
+                        try { targetContainer.style.position = 'relative'; } catch(e){}
+                    }
+                }
+            } catch(err) {
+                console.warn('Overlay src match error:', err);
+            }
+        }
+
         // --- Add Overlay if container found ---
         if (targetContainer) {
             if (!targetContainer.querySelector(':scope > .vsco-gps-overlay')) { // Check before adding
@@ -259,6 +277,11 @@ function processImageElement(imgElement) {
     if (mediaLink && mediaLink.href) {
          const match = mediaLink.href.match(/\/media\/([a-f0-9]{24,})/);
          if (match && match[1]) { mediaId = match[1]; }
+    }
+    // Fallback: derive media ID from current page URL on standalone media pages
+    if (!mediaId) {
+        const pathMatch = window.location.pathname.match(/\/media\/([a-f0-9]{24,})/);
+        if (pathMatch && pathMatch[1]) { mediaId = pathMatch[1]; }
     }
 
     if (imgElement.complete && imgElement.naturalWidth > 0) {
